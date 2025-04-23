@@ -4,9 +4,9 @@ A Django-based airport management system.
 
 ## Key Features
 
-Find the Nth Left or Right Node in an Airport Route ( create a search form)
-Find the Longest Node based on duration in the Airport (display)
-Find the Shortest Node based on duration Between Two Airports(display)
+- Find the Nth Left or Right Node in an Airport Route ( create a search form)
+- Find the Longest Node based on duration in the Airport (display)
+- Find the Shortest Node based on duration Between Two Airports(display)
 
 ## Tech Stack
 
