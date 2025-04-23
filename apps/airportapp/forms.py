@@ -38,6 +38,20 @@ class LongestDurationForm(forms.Form):
     start_code = forms.CharField(label="Start Airport Code", max_length=255)
     end_code = forms.CharField(label="End Airport Code", max_length=255)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        start = cleaned_data.get('start_code')
+        end = cleaned_data.get('end_code')
+        if start and end and start == end:
+            raise forms.ValidationError("Start and end airport codes must be different.")
+
 class ShortestDurationForm(forms.Form):
     start_code = forms.CharField(label="Start Airport Code", max_length=255)
     end_code = forms.CharField(label="End Airport Code", max_length=255)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start = cleaned_data.get('start_code')
+        end = cleaned_data.get('end_code')
+        if start and end and start == end:
+            raise forms.ValidationError("Start and end airport codes must be different.")

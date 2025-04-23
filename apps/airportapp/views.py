@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import AirportForm
+from .forms import LongestDurationForm, ShortestDurationForm
 from .models import Airport
+from .forms import FindLastChildForm
 
 def airport_create_view(request):
     if request.method == 'POST':
@@ -19,9 +21,7 @@ def airport_list_view(request):
 
 
 
-from django.shortcuts import render
-from .forms import FindLastChildForm
-from .models import Airport
+
 
 def find_last_child_airport(request):
     result = None
@@ -54,9 +54,6 @@ def find_last_child_airport(request):
     return render(request, 'find_last_child.html', {'form': form, 'result': result})
 
 
-from django.shortcuts import render, get_object_or_404
-from .models import Airport
-from .forms import LongestDurationForm
 
 def find_longest_duration(request):
     result = None
@@ -65,7 +62,9 @@ def find_longest_duration(request):
         if form.is_valid():
             start_code = form.cleaned_data['start_code']
             end_code = form.cleaned_data['end_code']
-            current_airport = get_object_or_404(Airport, code=end_code)
+            current_airport = Airport.objects.filter(code=end_code).first()
+            if not current_airport:
+                form.add_error(None, "Enter a valid start code / end code.")
             path = []
 
             while current_airport and current_airport.code != start_code:
@@ -96,9 +95,7 @@ def find_longest_duration(request):
     return render(request, 'find_longest_duration.html', {'form': form, 'result': result})
 
 
-from django.shortcuts import render, get_object_or_404
-from .forms import ShortestDurationForm
-from .models import Airport
+
 
 def find_shortest_duration(request):
     result = None
@@ -107,7 +104,9 @@ def find_shortest_duration(request):
         if form.is_valid():
             start_code = form.cleaned_data['start_code']
             end_code = form.cleaned_data['end_code']
-            current_airport = get_object_or_404(Airport, code=end_code)
+            current_airport = Airport.objects.filter(code=end_code).first()
+            if not current_airport:
+                form.add_error(None, "Enter a valid start code / end code.")
             path = []
 
             while current_airport and current_airport.code != start_code:
