@@ -21,6 +21,7 @@ Find the Shortest Node based on duration Between Two Airports(display)
 ```bash
 # Clone the project
 git clone https://github.com/shahisiiii/Arport-management.git
+git checkout master
 cd airport
 
 # Setup virtual environment
